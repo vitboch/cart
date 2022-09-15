@@ -17,32 +17,36 @@ const CountersList = () => {
   const handleReset = () => {
     setCounters(initialState)
   }
-  const handleUpdate = () => {
-    const updatedState = [
-      { id: 0, value: 1, name: 'Useless thing' },
-      { id: 1, value: 2, name: 'Spoon' },
-      { id: 2, value: 3, name: 'Fork' },
-      { id: 3, value: 4, name: 'Plate' },
-      { id: 4, value: 0, name: 'Minimalist set' },
-    ]
-    setCounters(updatedState)
+  const handleIncrement = id => {
+    const newCounters = counters.map(c => {
+      if (c.id === id) {
+        c.value += 1
+      }
+      return c
+    })
+    setCounters(newCounters)
   }
+  const handleDecrement = id => {
+    const newCounters = counters.map(c => {
+      if (c.id === id) {
+        c.value -= 1
+      }
+      return c
+    })
+    setCounters(newCounters)
+  }
+
   return (
     <>
       {counters.map(count => (
-        <Counter key={count.id} onDelete={handleDelete} {...count} />
+        <Counter key={count.id} onDelete={handleDelete} onIncrement={handleIncrement}
+                 onDecrement={handleDecrement} {...count} />
       ))}
       <button
         className='btn btn-primary btn-sm m-2'
         onClick={handleReset}
       >
         Reset
-      </button>
-      <button
-        className='btn btn-primary btn-sm m-2'
-        onClick={handleUpdate}
-      >
-        Update
       </button>
     </>
   )

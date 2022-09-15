@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Counter = props => {
   const { value } = props
@@ -10,15 +10,6 @@ const Counter = props => {
     classes += value === 0 ? 'bg-warning' : 'bg-primary'
     return classes
   }
-  const handleIncrement = () => {
-    // setValue(prevState => prevState + 1)
-    console.log('handleIncrement')
-
-  }
-  const handleDecrement = () => {
-    // setValue(prevState => prevState - 1)
-    console.log('handleDecrement')
-  }
 
   return (
     <div>
@@ -26,13 +17,13 @@ const Counter = props => {
       <span className={getBadgeClasses()}>{formatValue()}</span>
       <button
         className={'btn btn-primary btn-sm m-2'}
-        onClick={handleIncrement}
+        onClick={() => props.onIncrement(props.id)}
       >
         +
       </button>
       <button
         className={'btn btn-primary btn-sm m-2'}
-        onClick={handleDecrement}
+        onClick={() => props.onDecrement(props.id)}
       >
         -
       </button>
